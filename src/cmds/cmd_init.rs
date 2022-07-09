@@ -18,12 +18,12 @@
 use clap::Args;
 
 #[derive(Debug, Args)]
-pub struct ChangelogCommand {
+pub struct InitCommand {
     #[clap(short, long)]
-    /// Force the changelog to be printed
+    /// Forces the update
     pub force: bool,
 }
 
-pub fn show_changelog(cmd: ChangelogCommand) {
-    println!("Showing changelog {:?}", cmd);
+pub fn init(cmd: InitCommand) {
+    println!("Initializing {:?}", cmd);
 }

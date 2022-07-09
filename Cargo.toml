@@ -3,8 +3,13 @@ name = "mcpack"
 version = "0.1.0"
 authors = ["philippewarren"]
 edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "A Minecraft modpack manager"
 readme = "README.md"
-license = "LICENCE"
+homepage = "https://github.com/philippewarren/mcpack"
+repository = "https://github.com/philippewarren/mcpack"
+keywords = ["cli", "minecraft", "modpack"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -17,7 +22,7 @@ log = "0.4.17"
 simplelog = { version = "0.12.0", features = ["paris"] }
 paris = "1.5.13"
 clap_complete = "3.2.3"
-self_update = "0.30.0"
+self_update = { version = "0.30.0", features = ["archive-tar", "archive-zip"] }
 
 
 [dev-dependencies]

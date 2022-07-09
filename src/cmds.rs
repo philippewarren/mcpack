@@ -18,13 +18,21 @@
 use clap::{ArgAction, Parser, Subcommand};
 
 use cmd_changelog::ChangelogCommand;
+use cmd_dev::DevCommand;
+use cmd_edit::EditCommand;
 use cmd_generate_completions::GenerateCompletionsCommand;
+use cmd_init::InitCommand;
+use cmd_status::StatusCommand;
 use cmd_update::UpdateCommand;
 
 pub mod cmd_update;
 pub mod cmd_changelog;
 pub mod cmd_status;
 pub mod cmd_generate_completions;
+pub mod cmd_self_upgrade;
+pub mod cmd_init;
+pub mod cmd_edit;
+pub mod cmd_dev;
 
 #[derive(Debug, Parser)]
 #[clap(author, about, version)]
@@ -35,6 +43,9 @@ pub struct Cli {
     #[clap(short, long, action = ArgAction::SetTrue)]
     /// Don't display anything to stdout or stderr
     pub quiet: bool,
+    /// Upgrade to the latest version of mcpack
+    #[clap(short, long, action = ArgAction::SetTrue)]
+    pub upgrade: bool,
     #[clap(subcommand)]
     /// The action to perform
     pub action: Action,
@@ -44,7 +55,7 @@ pub struct Cli {
 pub enum Action {
     #[clap(name = "status")]
     /// Prints the status of the modpack
-    Status,
+    Status(StatusCommand),
     #[clap(name = "update")]
     /// Updates the modpack
     Update(UpdateCommand),
@@ -54,4 +65,13 @@ pub enum Action {
     #[clap(name = "generate-completions")]
     /// Generates shell completions for the cli
     GenerateCompletions(GenerateCompletionsCommand),
+    #[clap(name = "init")]
+    /// Initializes the modpack
+    Init(InitCommand),
+    #[clap(name = "edit")]
+    /// Edit modpack informations
+    Edit(EditCommand),
+    #[clap(name = "dev")]
+    /// Command group for modpack development
+    Dev(DevCommand),
 }

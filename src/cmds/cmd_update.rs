@@ -40,5 +40,5 @@ pub struct UpdateCommand {
 
 
 pub fn update(cmd: UpdateCommand) {
-    println!("Printing status {:?}", cmd);
+    println!("Updating {:?}", cmd);
 }

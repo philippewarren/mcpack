@@ -15,6 +15,15 @@
  *
  */
 
-pub fn print_status() {
-    println!("Printing status");
+use clap::Args;
+
+#[derive(Debug, Args)]
+pub struct StatusCommand {
+    #[clap(short, long)]
+    /// Forces the update
+    pub force: bool,
+}
+
+pub fn print_status(cmd: StatusCommand) {
+    println!("Printing status {:?}", cmd);
 }

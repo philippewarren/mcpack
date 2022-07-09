@@ -15,36 +15,27 @@
  *
  */
 
-use std::io::Write;
-
 use clap::{Args, Subcommand};
-use clap::CommandFactory;
-use clap_complete::{generate, shells};
 
-use super::Cli;
+use cmd_dev_init::{dev_init, DevInitCommand};
+
+mod cmd_dev_init;
 
 #[derive(Debug, Args)]
-pub struct GenerateCompletionsCommand {
+pub struct DevCommand {
     #[clap(subcommand)]
-    pub shell: GenerateCompletionsShell,
+    pub action: DevAction,
 }
 
 #[derive(Debug, Subcommand)]
-pub enum GenerateCompletionsShell {
-    #[clap(name = "bash")]
-    /// Generates a bash-completion script for the cli
-    Bash,
+pub enum DevAction {
+    #[clap(name = "init")]
+    /// Initializes a modpack for development
+    Init(DevInitCommand),
 }
 
-pub fn generate_completions<T>(shell: GenerateCompletionsShell, output: &mut T) where T: Write {
-    match shell {
-        GenerateCompletionsShell::Bash => {
-            generate(
-                shells::Bash,
-                &mut Cli::command(),
-                "mcpack",
-                output,
-            );
-        }
+pub fn dev(cmd: DevCommand) {
+    match cmd.action {
+        DevAction::Init(cmd) => dev_init(cmd),
     }
 }
