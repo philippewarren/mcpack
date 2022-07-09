@@ -4,18 +4,20 @@ version = "0.1.0"
 authors = ["philippewarren"]
 edition = "2021"
 readme = "README.md"
-#license = "LICENSE"
+license = "LICENCE"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 git2 = "0.13.25"
-clap = { version = "3.2.7", features = ["derive", "env"] }
+clap = { version = "3.2.8", features = ["derive", "env"] }
 directories = "4.0.1"
 reqwest = { version = "0.11.9", features = ["blocking"] }
-log = "0.4.14"
+log = "0.4.17"
 simplelog = { version = "0.12.0", features = ["paris"] }
 paris = "1.5.13"
+clap_complete = "3.2.3"
+self_update = "0.30.0"
 
 
 [dev-dependencies]
