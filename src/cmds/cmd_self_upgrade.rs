@@ -21,7 +21,6 @@ pub fn upgrade(quiet: bool) -> Result<(), Box<dyn std::error::Error>> {
     self_update::backends::github::Update::configure()
         .repo_owner("philippewarren")
         .repo_name("mcpack")
-        .bin_path_in_archive("bin/mcpack")
         .bin_name("mcpack")
         .show_download_progress(!quiet)
         .show_output(!quiet)
@@ -29,5 +28,13 @@ pub fn upgrade(quiet: bool) -> Result<(), Box<dyn std::error::Error>> {
         .current_version(cargo_crate_version!())
         .build()?
         .update()?;
+    Ok(())
+}
+
+#[cfg(windows)]
+pub fn cleanup_backup_file() -> Result<(), Box<dyn std::error::Error>> {
+    if let Some(f) = glob::glob("__mcpack.exe_backup*")?.next() {
+        std::fs::remove_dir_all(f?.as_path())?;
+    }
     Ok(())
 }

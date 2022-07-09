@@ -24,6 +24,7 @@ pub struct EditCommand {
     pub force: bool,
 }
 
-pub fn edit(cmd: EditCommand) {
+pub fn edit(cmd: EditCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Editing {:?}", cmd);
+    Ok(())
 }

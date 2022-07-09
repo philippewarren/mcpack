@@ -36,7 +36,7 @@ pub enum GenerateCompletionsShell {
     Bash,
 }
 
-pub fn generate_completions<T>(shell: GenerateCompletionsShell, output: &mut T) where T: Write {
+pub fn generate_completions<T>(shell: GenerateCompletionsShell, output: &mut T) -> Result<(), Box<dyn std::error::Error>> where T: Write {
     match shell {
         GenerateCompletionsShell::Bash => {
             generate(
@@ -47,4 +47,5 @@ pub fn generate_completions<T>(shell: GenerateCompletionsShell, output: &mut T) 
             );
         }
     }
+    Ok(())
 }

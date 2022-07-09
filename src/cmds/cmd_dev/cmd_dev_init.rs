@@ -24,6 +24,7 @@ pub struct DevInitCommand {
     pub force: bool,
 }
 
-pub fn dev_init(cmd: DevInitCommand) {
+pub fn dev_init(cmd: DevInitCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Dev: Initializing {:?}", cmd);
+    Ok(())
 }

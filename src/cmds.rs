@@ -43,9 +43,6 @@ pub struct Cli {
     #[clap(short, long, action = ArgAction::SetTrue)]
     /// Don't display anything to stdout or stderr
     pub quiet: bool,
-    /// Upgrade to the latest version of mcpack
-    #[clap(short, long, action = ArgAction::SetTrue)]
-    pub upgrade: bool,
     #[clap(subcommand)]
     /// The action to perform
     pub action: Action,
@@ -53,25 +50,28 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Action {
-    #[clap(name = "status")]
+    #[clap()]
     /// Prints the status of the modpack
     Status(StatusCommand),
-    #[clap(name = "update")]
+    #[clap()]
     /// Updates the modpack
     Update(UpdateCommand),
-    #[clap(name = "changelog")]
+    #[clap()]
     /// Prints the changelog of the modpack
     Changelog(ChangelogCommand),
-    #[clap(name = "generate-completions")]
+    #[clap()]
     /// Generates shell completions for the cli
     GenerateCompletions(GenerateCompletionsCommand),
-    #[clap(name = "init")]
+    #[clap()]
+    /// Upgrades to the latest version of mcpack
+    SelfUpgrade,
+    #[clap()]
     /// Initializes the modpack
     Init(InitCommand),
-    #[clap(name = "edit")]
+    #[clap()]
     /// Edit modpack informations
     Edit(EditCommand),
-    #[clap(name = "dev")]
+    #[clap()]
     /// Command group for modpack development
     Dev(DevCommand),
 }

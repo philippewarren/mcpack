@@ -24,6 +24,7 @@ pub struct InitCommand {
     pub force: bool,
 }
 
-pub fn init(cmd: InitCommand) {
+pub fn init(cmd: InitCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Initializing {:?}", cmd);
+    Ok(())
 }

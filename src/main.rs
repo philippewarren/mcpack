@@ -33,6 +33,10 @@ mod modfiles;
 mod cmds;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    if cfg!(windows) {
+        cmds::cmd_self_upgrade::cleanup_backup_file()?;
+    }
+
     let args: Cli = Cli::parse();
     let log_level = match args.verbose {
         0 => LevelFilter::Warn,
@@ -46,36 +50,35 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cfg = ConfigBuilder::new().set_time_level(LevelFilter::Debug).build();
     TermLogger::init(log_level, cfg, TerminalMode::Stderr, ColorChoice::Auto).unwrap();
 
-    if args.upgrade {
-        return cmd_self_upgrade::upgrade(args.quiet);
-    }
-
     match args.action {
         Action::Status(cmd) => {
-            cmd_status::print_status(cmd);
+            cmd_status::print_status(cmd)?
         }
         Action::Update(cmd) => {
-            cmd_update::update(cmd);
             error!("Updating error");
             warn!("Updating warning");
             info!("Updating info");
             debug!("Updating debug");
             trace!("Updating trace");
+            cmd_update::update(cmd)?
         }
         Action::Changelog(cmd) => {
-            cmd_changelog::show_changelog(cmd);
+            cmd_changelog::show_changelog(cmd)?
         }
         Action::GenerateCompletions(cmd) => {
-            cmd_generate_completions::generate_completions(cmd.shell, &mut std::io::stdout());
+            cmd_generate_completions::generate_completions(cmd.shell, &mut std::io::stdout())?
         }
         Action::Init(cmd) => {
-            cmd_init::init(cmd);
+            cmd_init::init(cmd)?
         }
         Action::Edit(cmd) => {
-            cmd_edit::edit(cmd);
+            cmd_edit::edit(cmd)?
         }
         Action::Dev(cmd) => {
-            cmd_dev::dev(cmd);
+            cmd_dev::dev(cmd)?
+        }
+        Action::SelfUpgrade => {
+            cmd_self_upgrade::upgrade(args.quiet)?
         }
     }
 

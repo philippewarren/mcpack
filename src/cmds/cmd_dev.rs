@@ -34,8 +34,12 @@ pub enum DevAction {
     Init(DevInitCommand),
 }
 
-pub fn dev(cmd: DevCommand) {
+pub fn dev(cmd: DevCommand) -> Result<(), Box<dyn std::error::Error>> {
     match cmd.action {
-        DevAction::Init(cmd) => dev_init(cmd),
+        DevAction::Init(cmd) => dev_init(cmd)?,
     }
+
+    Ok(())
 }
+
+// TODO: Use ArgGroup in `dev export` to increment major, minor or patch

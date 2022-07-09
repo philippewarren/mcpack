@@ -24,6 +24,7 @@ pub struct ChangelogCommand {
     pub force: bool,
 }
 
-pub fn show_changelog(cmd: ChangelogCommand) {
+pub fn show_changelog(cmd: ChangelogCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Showing changelog {:?}", cmd);
+    Ok(())
 }

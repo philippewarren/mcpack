@@ -39,6 +39,7 @@ pub struct UpdateCommand {
 }
 
 
-pub fn update(cmd: UpdateCommand) {
+pub fn update(cmd: UpdateCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Updating {:?}", cmd);
+    Ok(())
 }

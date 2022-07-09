@@ -24,6 +24,7 @@ pub struct StatusCommand {
     pub force: bool,
 }
 
-pub fn print_status(cmd: StatusCommand) {
+pub fn print_status(cmd: StatusCommand) -> Result<(), Box<dyn std::error::Error>> {
     println!("Printing status {:?}", cmd);
+    Ok(())
 }
