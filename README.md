@@ -96,3 +96,8 @@ It is structured as is the root of a Minecraft instance folder, which means that
 as `.minecraft/config`.
 
 ## Licence and Copyright
+
+Copyright (c) 2022 Philippe Warren (philippewarren)\
+Liencesed under the Apache 2.0 License
+
+See the full license in the [licence file](LICENCE).
